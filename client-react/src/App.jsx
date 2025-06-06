@@ -7,11 +7,15 @@ function App() {
   
   const [users, setUsers] = useState([]); 
 
-  useEffect(()=>{
-    fetch('http://localhost:5000/api/users')
-      .then(res => res.json())
-      .then(data => setUsers(data.users));
-  });
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetch('http://localhost:5000/api/users')
+        .then(res => res.json())
+        .then(data => setUsers(data.users));
+    }, 3000); 
+
+    return () => clearTimeout(timer); 
+  }, []); 
 
   return (
     <>
